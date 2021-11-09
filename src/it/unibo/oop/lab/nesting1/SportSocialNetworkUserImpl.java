@@ -6,6 +6,8 @@ package it.unibo.oop.lab.nesting1;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
 import it.unibo.oop.lab.socialnetwork.User;
 
@@ -53,12 +55,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * TODO: initialize properly these sports
      */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new SportSocialNetworkUserImpl.Sport("soccer");
+        F1 = new SportSocialNetworkUserImpl.Sport("Formula 1");
+        MOTOGP = new SportSocialNetworkUserImpl.Sport("Moto GP");
+        VOLLEY = new SportSocialNetworkUserImpl.Sport("Volleyball");
+        BASKET = new SportSocialNetworkUserImpl.Sport("Basketball");
+        BIKE = new SportSocialNetworkUserImpl.Sport("Cicling");
     }
 
     /**
@@ -136,7 +138,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * with its bare name.
      */
     public static final class Sport {
-        /*
+        private final String name;
+        
+        public Sport(final String name) {
+        	this.name = name;
+        }
+    	/*
          * TODO
          * 
          * Redefine equals so that two sports are equal only if they feature the
@@ -144,7 +151,15 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
          */
         @Override
         public boolean equals(final Object o) {
-            return false;
+            if (o instanceof Sport) {
+            	return o.hashCode() == this.hashCode();
+            } else {
+            	return false;
+            }
+        }
+        
+        public int hashCode() {
+        	return this.name.hashCode();
         }
     }
 }
