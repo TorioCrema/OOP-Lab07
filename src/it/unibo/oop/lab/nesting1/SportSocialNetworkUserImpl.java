@@ -116,7 +116,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public void addSport(final Sport sport) {
-
+    	this.sports.add(sport);
     }
 
     /**
@@ -128,7 +128,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return this.sports.contains(s);
     }
 
     /*
@@ -152,12 +152,20 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
         @Override
         public boolean equals(final Object o) {
             if (o instanceof Sport) {
-            	return o.hashCode() == this.hashCode();
+            	Sport sport = (Sport)o;
+            	return sport.getName().equals(this.name);
             } else {
             	return false;
             }
         }
         
+        public String getName() {
+        	return this.name;
+        }
+        
+        /**
+         * {@inheritDoc}
+         */
         public int hashCode() {
         	return this.name.hashCode();
         }
